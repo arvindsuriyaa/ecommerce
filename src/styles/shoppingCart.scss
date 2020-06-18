@@ -1,0 +1,33 @@
+.shoppingCart {
+  width: 65%;
+  .displayCart {
+    padding: 0 30px;
+    .cartTitle {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+    .cartTable {
+      width: 100%;
+      overflow-x: auto;
+      table {
+        width: 100%;
+        display: table;
+        border-spacing: 0;
+        border-collapse: collapse;
+        tr {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.29);
+        }
+        td {
+          text-align: center;
+          .image {
+            height: 150px !important;
+            background-repeat: no-repeat !important;
+            background-size: auto !important;
+            background-position: center !important;
+          }
+        }
+      }
+    }
+  }
+}

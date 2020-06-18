@@ -1,0 +1,55 @@
+body {
+  margin:0px;
+  #login {
+    background: url("./ecom.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 95vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fieldset {
+      width: 35%;
+      //   height: 40%;
+      background: #ffffffec;
+      legend {
+        background-color: gray;
+        color: white;
+        padding: 5px 10px;
+      }
+      .userInfo {
+        height: 270px;
+        display: flex;
+        flex-flow: column;
+        width: 37%;
+        justify-content: center;
+        margin: auto;
+        input[type="text"] {
+          padding: 10px;
+          border-style: double;
+          width: 100%;
+        }
+        .error {
+          height: 18px;
+          display: flex;
+          justify-content: center;
+          color: red;
+        }
+        .submitSection {
+          display: flex;
+          justify-content: center;
+          margin: 10px;
+          button {
+            border: none;
+            padding: 12px;
+            color: white;
+            background-color: #1966f5;
+            font-weight: bolder;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
