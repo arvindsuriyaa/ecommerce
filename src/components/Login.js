@@ -20,6 +20,7 @@ const Login = (props) => {
       ...login,
       [event.target.name]: event.target.value,
     });
+    
   };
 
   function pushData(props) {
@@ -33,8 +34,8 @@ const Login = (props) => {
     actions.assignData("login", { ...login });
     console.log(isLoggedIn);
     login.isLoggedIn = !isLoggedIn;
-    console.log("asdasdasdasjkhdasjdjhasd", userDetails);
     userDetails = [...userDetails, { ...login }];
+    console.log("userDetails", userDetails);
     sessionStorage.setItem("userDetails", JSON.stringify(userDetails));
     error = {};
     actions.assignData("error", error);
@@ -66,8 +67,8 @@ const Login = (props) => {
   const handleSubmit = () => {
     const { reducer, actions } = props;
     let { userDetails, login, error } = reducer;
-    const { email, isLoggedIn, categories } = login;
-    // debugger
+    const { email, isLoggedIn } = login;
+    debugger
     if (!validateUser()) {
       error.name = "This Field is Mandatory";
       actions.assignData("error", error);
@@ -106,10 +107,10 @@ const Login = (props) => {
               : null
           );
 
-          actions.assignData("login", { ...login });
-          userDetails.splice(indexValue, 1, { ...login });
-          // console.log(indexValue);
+          actions.assignData("login", login);
+          userDetails.splice(indexValue, 1, login);
           actions.assignData("userDetails", userDetails);
+          sessionStorage.clear()
           sessionStorage.setItem("userDetails", JSON.stringify(userDetails));
           login.name = "";
           login.email = "";

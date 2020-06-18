@@ -26,7 +26,7 @@ export const placeOrder = () => {
     let currentUser = JSON.parse(data);
     let notification;
     let userIndex;
-    let login = getState().reducer;
+    let {login} = getState().reducer;
     currentUser.map((user, index) =>
       user.isLoggedIn
         ? user.categories.map((purchase) =>
@@ -55,6 +55,7 @@ export const placeOrder = () => {
 export const addToCart = (productInfo) => {
   //   debugger
   return (dispatch, getState) => {
+    console.log("productINFOOOOOO", productInfo)
     let { notification, login } = getState().reducer;
     const data = sessionStorage.getItem("userDetails");
     let currentUser = JSON.parse(data);

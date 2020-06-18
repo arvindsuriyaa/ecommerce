@@ -9,8 +9,7 @@ const ProductCard = (props) => {
   const { productInfo, actions } = props;
   const { addToCart, reduceItem } = actions;
   const [cart, setCart] = useState(0);
-  console.log(
-    "Product props",
+  console.log("Product props",
     productInfo
   );
 
@@ -49,7 +48,7 @@ const ProductCard = (props) => {
         <button
           onClick={() => {
             setCart(cart + 1);
-            addToCart(props.productInfo);
+            addToCart(productInfo);
           }}
           style={cart === 0 ? { display: "block" } : { display: "none" }}
         >
@@ -59,7 +58,7 @@ const ProductCard = (props) => {
           <button
             onClick={() => {
               setCart(cart - 1);
-              reduceItem(props.productInfo);
+              reduceItem(productInfo);
             }}
           >
             -
@@ -68,7 +67,7 @@ const ProductCard = (props) => {
           <button
             onClick={() => {
               setCart(cart + 1);
-              addToCart(props.productInfo);
+              addToCart(productInfo);
             }}
           >
             +
