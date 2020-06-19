@@ -6,31 +6,36 @@
   align-items: center;
   background-color: #3f51b5;
   color: white;
-  .icon {
-    font-size: 20px;
-  }
-  span {
+  span{
     font-size: 22px;
   }
-  a {
-    color: white;
-    margin: 0px 15px;
-    padding: 14px;
-    text-decoration: none;
-  }
-  .notification {
-    position: absolute;
-    top: 11px;
-    right: 152px;
-    display: inline;
-    width: 17px;
-    height: 17px;
-    background-color: red;
-    border-radius: 25px;
-    text-align: center;
-    font-size: 15px;
+  .link {
     display: flex;
-    justify-content: center;
-    align-self: center;
+    
+    .icon {
+      font-size: 20px;
+    }
+    a, .user {
+      color: white;
+      margin: 0px 15px;
+      padding: 14px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .notification {
+      position: absolute;
+      top: 11px;
+      right: 171px;
+      display: inline;
+      width: 17px;
+      height: 17px;
+      background-color: red;
+      border-radius: 25px;
+      text-align: center;
+      font-size: 15px;
+      display: flex;
+      justify-content: center;
+      align-self: center;
+    }
   }
 }

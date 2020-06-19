@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/header.scss";
 import { bindDispatch } from "../utils";
@@ -9,17 +9,22 @@ const Header = (props) => {
   console.log("HEADRE", props);
   const { reducer, actions } = props;
   let { notification, userDetails } = reducer;
+  const [user, setUser] = useState([]);
   const [toggle, setToggle] = useState(true);
   let data = sessionStorage.getItem("userDetails");
+  let currentUser = JSON.parse(data);
+  let indice = useRef(null);
   useEffect(() => {
     let currentUser = JSON.parse(data);
     let itemCount = [];
-    currentUser.map((item) =>
+    let userIndex;
+    currentUser.map((item, index) =>
       item.isLoggedIn
         ? item.categories.map((purchase) =>
             purchase.isChecked
-              ? purchase.products.map((purchaseItem) =>
-                  itemCount.push(purchaseItem.addedToCart)
+              ? purchase.products.map(
+                  (purchaseItem) => itemCount.push(purchaseItem.addedToCart),
+                  (userIndex = index)
                 )
               : null
           )
@@ -28,6 +33,8 @@ const Header = (props) => {
     let totalItem = 0;
     itemCount.map((item) => (totalItem += item));
     // setCartCount(totalItem);
+    setUser(currentUser[userIndex]);
+    indice.current = user;
     notification = totalItem;
     actions.assignData("notification", totalItem);
   }, []);
@@ -40,14 +47,21 @@ const Header = (props) => {
           <i class="fas icon fa-shopping-cart"></i>
           <span className="notification">{notification}</span>
         </NavLink>
-        <NavLink to="/" style={!toggle ? { display: "block" } : { display: "none" }} onClick={props.logout}>
-          logout
-        </NavLink>
-        <div
-          onClick={() => setToggle(false)}
-          style={toggle ? { display: "block" } : { display: "none" }}
-        >
-          Arvind
+        <div style={{width:"118px", textTransform:"uppercase"}}>
+          <NavLink
+            to="/"
+            style={!toggle ? { display: "block" } : { display: "none" }}
+            onClick={props.logout}
+          >
+            logout
+          </NavLink>
+          <div
+            onClick={() => setToggle(false)}
+            className="user"
+            style={toggle ? { display: "block" } : { display: "none" }}
+          >
+            {user.name}
+          </div>
         </div>
       </div>
     </div>
