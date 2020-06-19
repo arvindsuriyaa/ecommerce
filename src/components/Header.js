@@ -9,7 +9,7 @@ const Header = (props) => {
   console.log("HEADRE", props);
   const { reducer, actions } = props;
   let { notification, userDetails } = reducer;
-
+  const [toggle, setToggle] = useState(true);
   let data = sessionStorage.getItem("userDetails");
   useEffect(() => {
     let currentUser = JSON.parse(data);
@@ -37,11 +37,18 @@ const Header = (props) => {
       <span>Welcome to React E-commerce Shopping Mart</span>
       <div className="link">
         <NavLink to="/layout/shopping-cart">
-          ShoppingCart<span className="notification">{notification}</span>
+          <i class="fas icon fa-shopping-cart"></i>
+          <span className="notification">{notification}</span>
         </NavLink>
-        <NavLink to="/" onClick={props.logout}>
+        <NavLink to="/" style={!toggle ? { display: "block" } : { display: "none" }} onClick={props.logout}>
           logout
         </NavLink>
+        <div
+          onClick={() => setToggle(false)}
+          style={toggle ? { display: "block" } : { display: "none" }}
+        >
+          Arvind
+        </div>
       </div>
     </div>
   );

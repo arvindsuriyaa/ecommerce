@@ -68,7 +68,7 @@ const Login = (props) => {
     const { reducer, actions } = props;
     let { userDetails, login, error } = reducer;
     const { email, isLoggedIn } = login;
-    debugger
+    // debugger
     if (!validateUser()) {
       error.name = "This Field is Mandatory";
       actions.assignData("error", error);

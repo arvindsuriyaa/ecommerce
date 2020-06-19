@@ -1,8 +1,54 @@
-#list{
-    width: 20%;
-    height: 100%;
-}
-.disabled {
-    pointer-events:none; //This makes it not clickable
-    opacity:0.6;         //This grays it out to look disabled
+#list {
+  width: 25%;
+  height: 100%;
+  ul {
+    list-style-type: none;
+    padding: 12px;
+    margin: 0px;
+    font-size: 18px;
+    li {
+      padding: 10px 10px;
+      display: flex;
+      justify-content: space-between;
+      input[type="checkbox"] {
+        cursor: pointer;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: 0;
+        background: lightgray;
+        height: 16px;
+        width: 16px;
+        border: 1px solid white;
+        transform: scale(1.25);
+      }
+      input[type="checkbox"]:checked {
+        background: #f50057;
+      }
+      input[type="checkbox"]:hover {
+        filter: brightness(90%);
+      }
+      input[type="checkbox"]:after {
+        content: "";
+        font-size: 16px;
+        position: relative;
+        left: 40%;
+        top: 20%;
+        width: 15%;
+        height: 40%;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        display: none;
+      }
+
+      input[type="checkbox"]:checked:after {
+        display: block;
+      }
+
+      input[type="checkbox"]:disabled:after {
+        border-color: #7b7b7b;
+      }
+    }
+  }
 }

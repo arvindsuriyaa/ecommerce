@@ -1,11 +1,17 @@
 #title {
   display: flex;
   justify-content: space-between;
-  padding: 0px 80px;
+  padding: 0px 35px;
   height: 64px;
   align-items: center;
   background-color: #3f51b5;
   color: white;
+  .icon {
+    font-size: 20px;
+  }
+  span {
+    font-size: 22px;
+  }
   a {
     color: white;
     margin: 0px 15px;
@@ -14,13 +20,17 @@
   }
   .notification {
     position: absolute;
-    top: 16px;
+    top: 11px;
+    right: 152px;
     display: inline;
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
     background-color: red;
     border-radius: 25px;
     text-align: center;
     font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
   }
 }

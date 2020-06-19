@@ -30,7 +30,7 @@ const Categories = (props) => {
         : null
     );
     actions.assignData("login", { ...login, categories: categories });
-    debugger;
+    // debugger;
 
     setState(categories);
     let currentUser = JSON.parse(data);
@@ -131,7 +131,7 @@ const Categories = (props) => {
               {product.label}
               <input
                 type="checkbox"
-                className="toggleCheck"
+                className="checkBox"
                 name={product.label}
                 checked={product.isChecked ? true : false}
                 onChange={(event) => toggleChange(event)}

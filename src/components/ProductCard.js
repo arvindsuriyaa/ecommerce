@@ -42,10 +42,11 @@ const ProductCard = (props) => {
       ></div>
       <div className="aboutBrand">
         <div>{productInfo.brand}</div>
-        <div>{productInfo.mrp}</div>
+        <div>${productInfo.mrp}</div>
       </div>
       <div className="addToCard">
         <button
+        className="addToCart"
           onClick={() => {
             setCart(cart + 1);
             addToCart(productInfo);
@@ -54,8 +55,9 @@ const ProductCard = (props) => {
         >
           AddToCard
         </button>
-        <div style={cart > 0 ? { display: "block" } : { display: "none" }}>
+        <div className="customize"style={cart > 0 ? { display: "flex" } : { display: "none" }}>
           <button
+          className="remove"
             onClick={() => {
               setCart(cart - 1);
               reduceItem(productInfo);
@@ -63,8 +65,9 @@ const ProductCard = (props) => {
           >
             -
           </button>
-          {cart}
+          <div className="quantity">{cart}</div>
           <button
+            className="add"
             onClick={() => {
               setCart(cart + 1);
               addToCart(productInfo);

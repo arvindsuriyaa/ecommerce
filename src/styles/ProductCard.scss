@@ -6,12 +6,13 @@
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   width: 315px;
-  height: 300px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  height: 320px;
+  margin-right: 20px;
+  margin-top: 15px;
   .title {
     display: flex;
     padding: 16px;
+    font-size: 20px;
     align-items: center;
   }
   .image {
@@ -22,10 +23,27 @@
   }
   .aboutBrand {
     padding: 16px;
+    font-size: 18px;
   }
-  .addToCart {
+  .addToCard {
     display: flex;
-    padding: 8px;
-    align-items: center;
+    justify-content: center;
+    .addToCart {
+      height: 32px;
+      width: 96%;
+    }
+    .customize {
+      width: 96%;
+      justify-content: space-evenly;
+      .add, .remove {
+        height: 32px;
+        width: 55px;
+      }
+      .quantity{
+        display: flex;
+        justify-content: center;
+        align-self: center;
+      }
+    }
   }
 }
