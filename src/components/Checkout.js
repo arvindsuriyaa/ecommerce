@@ -20,7 +20,8 @@ const Checkout = (props) => {
         className="checkOutContainer"
         style={show ? { opacity: 0.4 } : { opacity: 1 }}
       >
-        <button className="backToCart"
+        <button
+          className="backToCart"
           onClick={() => {
             history.push("/layout/shopping-cart");
           }}
@@ -34,24 +35,28 @@ const Checkout = (props) => {
           }}
         >
           <div className="orderStatus">
-            <div>Order Summary</div>
-            <div>you have {notification} items in your shopping cart</div>
+            <div style={{ fontSize: "23px" }}>Order Summary</div>
+            <div style={{ fontSize: "18px", color: "rgba(0, 0, 0, 0.54)" }}>
+              You have {notification} items in your shopping cart
+            </div>
           </div>
           <div className="orderDetails">
             {categories &&
               categories.map((purchaseList) =>
                 purchaseList.products.map((product) =>
                   product.addedToCart ? (
-                    <div className="CheckoutItems">
-                      <span>
-                        {product.addedToCart} X {product.name}
-                      </span>
-                      <span>$ {product.quantityPrice}</span>
+                    <div>
+                      <div className="CheckoutItems">
+                        <span>
+                          {product.addedToCart} X {product.name}
+                        </span>
+                        <span>$ {product.quantityPrice}</span>
+                      </div>
+                      <hr style={{width:"875px",margin:"0px 15px"}}/>
                     </div>
                   ) : null
                 )
               )}
-            <hr />
             <div className="totalValue">
               <span>Total Price</span>
               <span>
@@ -69,7 +74,8 @@ const Checkout = (props) => {
             </div>
           </div>
         </div>
-        <button className="placeOrder"
+        <button
+          className="placeOrder"
           onClick={() => {
             setShow(true);
           }}

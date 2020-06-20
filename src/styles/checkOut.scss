@@ -1,8 +1,15 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
 .checkOutContainer {
   padding: 30px;
   margin-top: 20px;
   width: 900px;
-  .backToCart{
+  .backToCart {
     background-color: rgb(255, 255, 255);
     padding: 10px 25px;
     color: rgba(0, 0, 0, 0.87);
@@ -28,10 +35,11 @@
         padding: 16px;
         justify-content: space-between;
         align-items: center;
+        font-weight: bold;
       }
     }
   }
-  .placeOrder{
+  .placeOrder {
     background-color: blue;
     color: white;
     margin: 15px 0px;
