@@ -124,20 +124,25 @@ const ShoppingCart = (props) => {
   let totalAmount = 0;
   let history = useHistory();
   return (
-    <div>
+    <div className="cart">
       <button
+        className="backButton"
         onClick={() => {
           history.push("/layout/products");
         }}
       >
         Back to products
       </button>
+      <h3>Shopping Cart</h3>
       <div className="shoppingCart">
-        <h1>Shopping Cart</h1>
         <div className="displayCart">
           <div className="cartTitle">
-            <span>you have {notification} items in your cart</span>
-            <button onClick={emptyCart}>clear shopping cart</button>
+            <span className="totalNum">
+              You have {notification} items in your cart
+            </span>
+            <button className="backButton" onClick={emptyCart}>
+              clear shopping cart
+            </button>
           </div>
           <div className="cartTable">
             {notification ? (
@@ -168,6 +173,7 @@ const ShoppingCart = (props) => {
                               <td>{item.name}</td>
                               <td>
                                 <button
+                                  className="remove"
                                   onClick={() => {
                                     reduceItem(item);
                                   }}
@@ -175,7 +181,7 @@ const ShoppingCart = (props) => {
                                   -
                                 </button>
                                 {item.addedToCart}
-                                <button onClick={() => addToCart(item)}>
+                                <button className="add" onClick={() => addToCart(item)}>
                                   +
                                 </button>
                               </td>
@@ -203,13 +209,6 @@ const ShoppingCart = (props) => {
                     </tr>
                   </tfoot>
                 </table>
-                <button
-                  onClick={() => {
-                    history.push("/layout/check-out");
-                  }}
-                >
-                  CheckOut
-                </button>
               </div>
             ) : (
               <div>no products in cart</div>
@@ -217,6 +216,13 @@ const ShoppingCart = (props) => {
           </div>
         </div>
       </div>
+          <button className="checkOut"
+            onClick={() => {
+              history.push("/layout/check-out");
+            }}
+          >
+            CheckOut
+          </button>
     </div>
   );
 };

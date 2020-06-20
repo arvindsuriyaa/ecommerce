@@ -20,7 +20,7 @@ const Checkout = (props) => {
         className="checkOutContainer"
         style={show ? { opacity: 0.4 } : { opacity: 1 }}
       >
-        <button
+        <button className="backToCart"
           onClick={() => {
             history.push("/layout/shopping-cart");
           }}
@@ -69,7 +69,7 @@ const Checkout = (props) => {
             </div>
           </div>
         </div>
-        <button
+        <button className="placeOrder"
           onClick={() => {
             setShow(true);
           }}

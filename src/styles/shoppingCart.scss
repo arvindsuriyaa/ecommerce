@@ -1,33 +1,71 @@
-.shoppingCart {
-  width: 65%;
-  .displayCart {
-    padding: 0 30px;
-    .cartTitle {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-    }
-    .cartTable {
-      width: 100%;
-      overflow-x: auto;
-      table {
+.cart {
+  margin: 10px;
+  .backButton {
+    background-color: rgb(255, 255, 255);
+    padding: 10px 25px;
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.14);
+    cursor: pointer;
+  }
+  .shoppingCart {
+    width: 65%;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.14);
+    .displayCart {
+      padding: 20px 30px;
+      .totalNum {
+        font-size: 22px;
+        align-self: center;
+      }
+      .cartTitle {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+      }
+      .cartTable {
         width: 100%;
-        display: table;
-        border-spacing: 0;
-        border-collapse: collapse;
-        tr {
-          border-bottom: 1px solid rgba(0, 0, 0, 0.29);
-        }
-        td {
-          text-align: center;
-          .image {
-            height: 150px !important;
-            background-repeat: no-repeat !important;
-            background-size: auto !important;
-            background-position: center !important;
+        overflow-x: auto;
+        table {
+          width: 100%;
+          display: table;
+          border-spacing: 0;
+          border-collapse: collapse;
+          th {
+            font-weight: 100;
+            padding: 20px 0px;
+          }
+          tr {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.29);
+          }
+          td {
+            text-align: center;
+            padding: 20px 0px;
+            .remove,
+            .add {
+              height: 32px;
+              width: 55px;
+              margin: 0 10px;
+            }
+            .image {
+              width: 250px;
+              height: 150px !important;
+              background-repeat: no-repeat !important;
+              background-size: auto !important;
+              background-position: center !important;
+            }
           }
         }
       }
     }
+  }
+  .checkOut {
+    background-color: blue;
+    color: white;
+    margin: 10px 0px;
+    padding: 10px 35px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
   }
 }

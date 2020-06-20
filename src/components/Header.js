@@ -43,11 +43,7 @@ const Header = (props) => {
     <div id="title">
       <span>Welcome to React E-commerce Shopping Mart</span>
       <div className="link">
-        <NavLink to="/layout/shopping-cart">
-          <i class="fas icon fa-shopping-cart"></i>
-          <span className="notification">{notification}</span>
-        </NavLink>
-        <div style={{width:"118px", textTransform:"uppercase"}}>
+        <div style={{width:"85px", textTransform:"uppercase"}}>
           <NavLink
             to="/"
             style={!toggle ? { display: "block" } : { display: "none" }}
@@ -63,6 +59,10 @@ const Header = (props) => {
             {user.name}
           </div>
         </div>
+        <NavLink to="/layout/shopping-cart">
+          <i class="fas icon fa-shopping-cart"></i>
+          <span className="notification">{notification}</span>
+        </NavLink>
       </div>
     </div>
   );
