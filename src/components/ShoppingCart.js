@@ -181,11 +181,14 @@ const ShoppingCart = (props) => {
                                   -
                                 </button>
                                 {item.addedToCart}
-                                <button className="add" onClick={() => addToCart(item)}>
+                                <button
+                                  className="add"
+                                  onClick={() => addToCart(item)}
+                                >
                                   +
                                 </button>
                               </td>
-                              <td>{item.quantityPrice}</td>
+                              <td>$ {item.quantityPrice}</td>
                             </tr>
                           ) : null
                         )
@@ -193,10 +196,11 @@ const ShoppingCart = (props) => {
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td>Total</td>
+                      <td>Total Price</td>
                       <td></td>
                       <td></td>
                       <td>
+                        ${" "}
                         {productList &&
                           productList.map((purchaseItem) =>
                             purchaseItem.products.map(
@@ -211,18 +215,20 @@ const ShoppingCart = (props) => {
                 </table>
               </div>
             ) : (
-              <div>no products in cart</div>
+              <div className="status">ⓘ No Products in cart</div>
             )}
           </div>
         </div>
       </div>
-          <button className="checkOut"
-            onClick={() => {
-              history.push("/layout/check-out");
-            }}
-          >
-            CheckOut
-          </button>
+      <button
+        className="checkOut"
+        onClick={() => {
+          history.push("/layout/check-out");
+        }}
+        style={notification ? { display: "block" } : { display: "none" }}
+      >
+        CheckOut
+      </button>
     </div>
   );
 };

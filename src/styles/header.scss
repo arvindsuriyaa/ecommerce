@@ -6,16 +6,17 @@
   align-items: center;
   background-color: #3f51b5;
   color: white;
-  span{
+  span {
     font-size: 22px;
   }
   .link {
     display: flex;
-    
+
     .icon {
       font-size: 20px;
     }
-    a, .user {
+    a,
+    .user {
       color: white;
       padding: 14px;
       text-decoration: none;
@@ -24,17 +25,17 @@
     .notification {
       position: absolute;
       top: 11px;
-      right: 40px;
+      right: 38px;
       display: inline;
-      width: 17px;
+      width: 18px;
       height: 17px;
       background-color: red;
       border-radius: 25px;
       text-align: center;
-      font-size: 15px;
+      font-size: 12px;
       display: flex;
       justify-content: center;
-      align-self: center;
+      align-items: center;
     }
   }
 }

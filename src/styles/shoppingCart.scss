@@ -56,6 +56,14 @@
             }
           }
         }
+        .status {
+          height: 50px;
+          display: flex;
+          align-items: center;
+          background-color: rgb(232, 244, 253);
+          color: rgb(13, 60, 97); 
+          padding: 0 15px;
+        }
       }
     }
   }
