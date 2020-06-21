@@ -8,11 +8,10 @@ import { createSelector } from "reselect";
 const Header = (props) => {
   console.log("HEADRE", props);
   const { reducer, actions } = props;
-  let { notification, userDetails } = reducer;
+  let { notification } = reducer;
   const [user, setUser] = useState([]);
   const [toggle, setToggle] = useState(true);
   let data = sessionStorage.getItem("userDetails");
-  let currentUser = JSON.parse(data);
   let indice = useRef(null);
   useEffect(() => {
     let currentUser = JSON.parse(data);
@@ -43,7 +42,7 @@ const Header = (props) => {
     <div id="title">
       <span>Welcome to React E-commerce Shopping Mart</span>
       <div className="link">
-        <div style={{width:"85px", textTransform:"uppercase"}}>
+        <div style={{ width: "85px", textTransform: "uppercase" }}>
           <NavLink
             to="/"
             style={!toggle ? { display: "block" } : { display: "none" }}
@@ -68,9 +67,8 @@ const Header = (props) => {
   );
 };
 const mapStateToProps = createSelector(
-  (state) => state.reducer, // input selector
-  (reducer) => ({ reducer }) // app is the value of the input selector
+  (state) => state.reducer,
+  (reducer) => ({ reducer })
 );
 
 export default connect(mapStateToProps, bindDispatch)(Header);
-// export default Header;

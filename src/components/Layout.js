@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/layout.scss";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
-import { Link, NavLink } from "react-router-dom";
 import { bindDispatch } from "../utils";
-import Header from "./Header";
 import LayoutContainer from "./LayoutContainer";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -12,12 +10,10 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 import Products from "./Products";
 import Checkout from "./Checkout";
-import Login from "./Login";
 
 const Layout = (props) => {
   const { reducer, actions } = props;
   const { login } = reducer;
-  console.log("props jsjkaskjadkljaskl", props);
   let history = useHistory();
   const [stateHandler, setState] = useState({});
   useEffect(() => {
@@ -68,8 +64,8 @@ const Layout = (props) => {
   );
 };
 const mapStateToProps = createSelector(
-  (state) => state.reducer, // input selector
-  (reducer) => ({ reducer }) // app is the value of the input selector
+  (state) => state.reducer, 
+  (reducer) => ({ reducer }) 
 );
 
 export default connect(mapStateToProps, bindDispatch)(Layout);

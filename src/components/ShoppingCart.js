@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/shoppingCart.scss";
 import { useHistory } from "react-router";
 import { bindDispatch } from "../utils";
@@ -7,90 +7,41 @@ import { createSelector } from "reselect";
 
 const ShoppingCart = (props) => {
   const { actions, reducer } = props;
+  const { addToCart, reduceItem } = actions;
   let { notification, login } = reducer;
   const [productList, setProducts] = useState([]);
+  const [userPosition, setUserPosition] = useState(null);
+
+  let indice = useRef(null);
 
   useEffect(() => {
     const data = sessionStorage.getItem("userDetails");
     let currentUser = JSON.parse(data);
-    currentUser.map((user) =>
-      user.isLoggedIn
-        ? (setProducts(user.categories), (login.categories = user.categories))
-        : null
-    );
-    actions.assignData("login", login);
-  }, []);
-
-  console.log("show shopping carts", productList);
-
-  const addToCart = (product) => {
-    const data = sessionStorage.getItem("userDetails");
-    let currentUser = JSON.parse(data);
-    console.log("productINFO", product);
-    notification = 0;
-    let userIndex;
     currentUser.map((user, index) =>
       user.isLoggedIn
-        ? user.categories.map((purchase) =>
-            purchase.isChecked
-              ? purchase.products.map(
-                  (purchaseItem) => (
-                    purchaseItem.name === product.name
-                      ? ((purchaseItem.addedToCart += 1),
-                        (purchaseItem.quantityPrice =
-                          purchaseItem.addedToCart * purchaseItem.mrp))
-                      : null,
-                    (notification += purchaseItem.addedToCart),
-                    (userIndex = index)
-                  )
-                )
-              : null
-          )
+        ? (setProducts(user.categories),
+          (login.categories = user.categories),
+          (indice.current = index))
         : null
     );
-    setProducts(currentUser[userIndex].categories);
-    console.log("currentUser", currentUser);
-    sessionStorage.clear();
-    sessionStorage.setItem("userDetails", JSON.stringify(currentUser));
-    actions.assignData("userDetails", currentUser);
-    actions.assignData("notification", notification);
-    login.categories = currentUser[userIndex].categories;
+    setUserPosition(indice.current);
     actions.assignData("login", login);
+  }, [actions, login]);
+
+  console.log("show shopping carts", userPosition);
+
+  const placeItem = (product) => {
+    addToCart(product);
+    const data = sessionStorage.getItem("userDetails");
+    let currentUser = JSON.parse(data);
+    setProducts(currentUser[userPosition].categories);
   };
 
-  const reduceItem = (product) => {
+  const removeItem = (product) => {
+    reduceItem(product);
     const data = sessionStorage.getItem("userDetails");
     let currentUser = JSON.parse(data);
-    console.log("productINFO", product);
-    notification = 0;
-    let userIndex;
-    currentUser.map((user, index) =>
-      user.isLoggedIn
-        ? user.categories.map((purchase) =>
-            purchase.isChecked
-              ? purchase.products.map(
-                  (purchaseItem) => (
-                    purchaseItem.name === product.name
-                      ? ((purchaseItem.addedToCart -= 1),
-                        (purchaseItem.quantityPrice =
-                          purchaseItem.addedToCart * purchaseItem.mrp))
-                      : null,
-                    (notification += purchaseItem.addedToCart),
-                    (userIndex = index)
-                  )
-                )
-              : null
-          )
-        : null
-    );
-    setProducts(currentUser[userIndex].categories);
-    console.log("currentUser", currentUser);
-    sessionStorage.clear();
-    sessionStorage.setItem("userDetails", JSON.stringify(currentUser));
-    actions.assignData("userDetails", currentUser);
-    actions.assignData("notification", notification);
-    login.categories = currentUser[userIndex].categories;
-    actions.assignData("login", login);
+    setProducts(currentUser[userPosition].categories);
   };
 
   const emptyCart = () => {
@@ -175,7 +126,7 @@ const ShoppingCart = (props) => {
                                 <button
                                   className="remove"
                                   onClick={() => {
-                                    reduceItem(item);
+                                    removeItem(item);
                                   }}
                                 >
                                   -
@@ -183,7 +134,9 @@ const ShoppingCart = (props) => {
                                 {item.addedToCart}
                                 <button
                                   className="add"
-                                  onClick={() => addToCart(item)}
+                                  onClick={() => {
+                                    placeItem(item);
+                                  }}
                                 >
                                   +
                                 </button>

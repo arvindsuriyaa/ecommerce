@@ -3,12 +3,11 @@ import "../styles/Modal.scss";
 import { bindDispatch } from "../utils";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
-import { useHistory } from "react-router";
 
 const Modal = (props) => {
-  const { actions, reducer, onClose } = props;
+  const { actions, onClose } = props;
   const { placeOrder } = actions;
-  let { notification, login } = reducer;
+
   if (!props.show) {
     return null;
   }

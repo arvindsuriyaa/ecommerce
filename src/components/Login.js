@@ -174,8 +174,8 @@ const Login = (props) => {
 };
 
 const mapStateToProps = createSelector(
-  (state) => state.reducer, // input selector
-  (reducer) => ({ reducer }) // app is the value of the input selector
+  (state) => state.reducer, 
+  (reducer) => ({ reducer }) 
 );
 
 export default connect(mapStateToProps, bindDispatch)(Login);

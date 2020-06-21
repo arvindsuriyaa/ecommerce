@@ -102,4 +102,4 @@ const mapStateToProps = createSelector(
 
 export default connect(mapStateToProps, bindDispatch)(Checkout);
 
-// export default Checkout;
+

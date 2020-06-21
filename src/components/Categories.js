@@ -9,12 +9,13 @@ const Categories = (props) => {
   const { actions, reducer } = props;
   const { login } = reducer;
   const { categories } = login;
-  console.log("this asdasdnasjkdhjkashdjh porps", categories);
 
   const [state, setState] = useState([]);
+  
   useEffect(() => {
     setState(categories);
   }, []);
+
   const data = sessionStorage.getItem("userDetails");
   let currentUser = JSON.parse(data);
   let currentUserIndex;
@@ -35,7 +36,7 @@ const Categories = (props) => {
     setState(categories);
     let currentUser = JSON.parse(data);
     let userIndex;
-    console.log("cureentuser", currentUser);
+    console.log("currentuser", currentUser);
     let checkFlag = [];
     currentUser.map((user, index) =>
       user.isLoggedIn
@@ -143,9 +144,9 @@ const Categories = (props) => {
   );
 };
 const mapStateToProps = createSelector(
-  (state) => state.reducer, // input selector
-  (reducer) => ({ reducer }) // app is the value of the input selector
+  (state) => state.reducer, 
+  (reducer) => ({ reducer }) 
 );
 
 export default connect(mapStateToProps, bindDispatch)(Categories);
-// export default Categories;
+
