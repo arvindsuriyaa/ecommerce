@@ -36,6 +36,9 @@ const Layout = (props) => {
     currentUser.map((item) =>
       item.isLoggedIn ? (item.isLoggedIn = false) : null
     );
+    login.id=0
+    login.categories=[]
+    actions.assignData("login",login)
     sessionStorage.clear();
     console.log("Logout", currentUser);
     actions.assignData("userDetails", currentUser);

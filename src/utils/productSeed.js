@@ -1,4 +1,4 @@
-export const productSeed = [
+export const  productSeed = [
   {
     id: 1,
     label: "Bread",

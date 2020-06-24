@@ -15,7 +15,6 @@ const initialState = {
 };
 
 export const reducer = (state = initialState, action) => {
-  // console.log(action.payload.value);
   switch (action.type) {
     case ASSIGN_DATA:
       return { ...state, [action.payload.name]: action.payload.value };

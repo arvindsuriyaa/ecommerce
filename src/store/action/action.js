@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { productSeed } from "/home/vhitech/Desktop/ecommerce/src/utils/productSeed";
 import ASSIGN_DATA from "../Types/types";
 
 export const assignData = (name, value) => ({
@@ -26,7 +25,7 @@ export const placeOrder = () => {
     let currentUser = JSON.parse(data);
     let notification;
     let userIndex;
-    let {login} = getState().reducer;
+    let { login } = getState().reducer;
     currentUser.map((user, index) =>
       user.isLoggedIn
         ? user.categories.map((purchase) =>
@@ -55,7 +54,7 @@ export const placeOrder = () => {
 export const addToCart = (productInfo) => {
   //   debugger
   return (dispatch, getState) => {
-    console.log("productINFOOOOOO", productInfo)
+    console.log("productINFOOOOOO", productInfo);
     let { notification, login } = getState().reducer;
     const data = sessionStorage.getItem("userDetails");
     let currentUser = JSON.parse(data);
@@ -126,5 +125,67 @@ export const reduceItem = (productInfo) => {
     dispatch(assignData("notification", notification));
     login.categories = currentUser[userIndex].categories;
     dispatch(assignData("login", login));
+  };
+};
+export const submitHandler = () => {
+  return (dispatch, getState) => {
+    let { login, error, userDetails } = getState().reducer;
+    let { isLoggedIn } = login;
+    let validation = Object.entries(login);
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    validation.forEach((element) => {
+      if (element[0] === "name") {
+        if (!element[1].length) {
+          error.name = "This Field is Mandatory";
+        }
+      } else if (element[0] === "email") {
+        if (!element[1].length) {
+          error.email = "This Field is Mandatory";
+        } else if (!reg.test(element[1])) {
+          error.email = "Enter a Valid Email";
+        }
+      }
+    });
+    dispatch(assignData("error", error));
+    if (!error.name && !error.email) {
+      let duplicateCheck = false;
+      let indexValue;
+      userDetails.map((user, index) =>
+        user["email"] === login["email"]
+          ? ((indexValue = index), (duplicateCheck = true))
+          : null
+      );
+      if (duplicateCheck) {
+        const data = sessionStorage.getItem("userDetails");
+        let currentUser = JSON.parse(data);
+        let newId = indexValue + 1;
+        login.id = newId;
+        login.isLoggedIn = true;
+        currentUser.map((item, index) =>
+          login.email === item.email
+            ? ((login.categories = item.categories),
+              (login.selectAll = item.selectAll))
+            : null
+        );
+
+        userDetails.splice(indexValue, 1, login);
+        sessionStorage.clear();
+      } else {
+        let newId = userDetails.length + 1;
+        login.id = newId;
+        login.categories = productSeed;
+        login.isLoggedIn = !isLoggedIn;
+        userDetails = [...userDetails, { ...login }];
+      }
+      dispatch(assignData("login", { ...login }));
+      sessionStorage.setItem("userDetails", JSON.stringify(userDetails));
+      dispatch(assignData("userDetails", userDetails));
+      login.name = "";
+      login.email = "";
+      login.categories = [];
+      login.isLoggedIn = isLoggedIn;
+      dispatch(assignData("login", { ...login }));
+      console.log("userDetails", userDetails);
+    }
   };
 };
