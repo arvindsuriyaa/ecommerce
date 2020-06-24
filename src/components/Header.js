@@ -42,7 +42,7 @@ const Header = (props) => {
     <div id="title">
       <span>Welcome to React E-commerce Shopping Mart</span>
       <div className="link">
-        <div style={{ width: "85px", textTransform: "uppercase" }}>
+        <div style={{ width: "auto", textTransform: "uppercase" }}>
           <NavLink
             to="/"
             style={!toggle ? { display: "block" } : { display: "none" }}
