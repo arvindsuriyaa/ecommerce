@@ -6,6 +6,7 @@ import {
   addToCart,
   reduceItem,
   submitHandler,
+  toggleChange,
 } from "../store/action/action";
 
 const bindDispatch = memoize((dispatch) => ({
@@ -16,6 +17,7 @@ const bindDispatch = memoize((dispatch) => ({
       addToCart,
       reduceItem,
       submitHandler,
+      toggleChange,
     },
     dispatch
   ),
