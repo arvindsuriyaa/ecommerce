@@ -1,8 +1,9 @@
 import React from "react";
-import "../styles/Modal.scss";
+import * as styles from "../styles/Modal.module.scss";
 import { bindDispatch } from "../utils";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
+import Button from "./common/Button";
 
 const Modal = (props) => {
   const { actions, onClose } = props;
@@ -16,14 +17,13 @@ const Modal = (props) => {
     onClose();
   };
 
-  console.log("props modallllll", props);
   return (
-    <div id="modal">
-      <div class="content">Thank you For placing the order</div>
-      <div class="actions">
-        <button class="toggle-button" onClick={dispatchOrder}>
+    <div id={styles.modal}>
+      <div className={styles.content}>Thank you For placing the order</div>
+      <div className={styles.actions}>
+        <Button className={styles.toggleButton} onClick={dispatchOrder}>
           OKAY
-        </button>
+        </Button>
       </div>
     </div>
   );

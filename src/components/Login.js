@@ -1,12 +1,14 @@
 import React from "react";
-import "../styles/login.scss";
+import * as styles from "../styles/login.module.scss";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
 import { bindDispatch } from "../utils";
 import { useHistory } from "react-router-dom";
+import Input from "./common/Input";
+import Button from "./common/Button";
+import * as directory from "../utils/RootDirectory";
 
 const Login = (props) => {
-  console.log("appsProps", props);
   const { reducer, actions } = props;
   const { submitHandler } = actions;
   let { login, error } = reducer;
@@ -15,7 +17,6 @@ const Login = (props) => {
   const handleLogin = (event) => {
     const { reducer, actions } = props;
     const { login } = reducer;
-    console.log("asd");
     actions.assignData("login", {
       ...login,
       [event.target.name]: event.target.value,
@@ -31,41 +32,46 @@ const Login = (props) => {
   };
 
   return (
-    <div id="login">
+    <div id={styles.login}>
       <fieldset>
         <legend>ECOMMERCE LOGIN</legend>
-        <div className="userInfo">
+        <div className={styles.userInfo}>
           <div>
-            <input
+            <Input
               type="text"
               name="name"
               placeholder="UserName"
               value={login.name}
               onChange={handleLogin}
               onFocus={clearError}
+              className={styles.userField}
             />
-            <div className="error">{error.name ? error.name : null}</div>
-            <input
+            <div className={styles.error}>{error.name ? error.name : null}</div>
+            <Input
               type="text"
               name="email"
-              placeholder="EmailId"
+              placeholder="Email Id"
               value={login.email}
               onChange={handleLogin}
               onFocus={clearError}
+              className={styles.userField}
             />
-            <div className="error">{error.email ? error.email : null}</div>
+            <div className={styles.error}>
+              {error.email ? error.email : null}
+            </div>
           </div>
-          <div className="submitSection">
-            <button
+          <div className={styles.submitSection}>
+            <Button
+              className={styles.submit}
               onClick={() => {
                 submitHandler();
                 if (!error.name && !error.email) {
-                  history.push(`./Layout`);
+                  history.push(directory.LAYOUT);
                 }
               }}
             >
               Submit
-            </button>
+            </Button>
           </div>
         </div>
       </fieldset>

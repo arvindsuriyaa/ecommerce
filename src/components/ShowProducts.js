@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-import "../styles/ShowProducts.scss";
+import * as styles from "../styles/ShowProducts.module.scss";
 import { bindDispatch } from "../utils";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
@@ -9,7 +9,7 @@ const ShowProducts = (props) => {
   const { login } = reducer;
   const { categories } = login;
   return (
-    <div id="showProducts">
+    <div id={styles.showProducts}>
       {categories &&
         categories.map((item) =>
           item.isChecked
@@ -22,8 +22,8 @@ const ShowProducts = (props) => {
   );
 };
 const mapStateToProps = createSelector(
-  (state) => state.reducer, 
-  (reducer) => ({ reducer }) 
+  (state) => state.reducer,
+  (reducer) => ({ reducer })
 );
 
 export default connect(mapStateToProps, bindDispatch)(ShowProducts);

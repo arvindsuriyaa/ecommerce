@@ -1,80 +1,77 @@
 /* eslint-disable no-sequences */
 import React, { useState, useEffect } from "react";
-import "../styles/ProductCard.scss";
+import * as styles from "../styles/ProductCard.module.scss";
 import { bindDispatch } from "../utils";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
+import Button from "./common/Button";
+
 const ProductCard = (props) => {
-  console.log("productCards", props);
   const { productInfo, actions } = props;
   const { addToCart, reduceItem } = actions;
   const [cart, setCart] = useState(0);
-  console.log("Product props",
-    productInfo
-  );
-
   useEffect(() => {
     const data = sessionStorage.getItem("userDetails");
     let currentUser = JSON.parse(data);
-    console.log("productINFO", productInfo.name);
 
-    currentUser.map((item) =>
-      item.isLoggedIn
-        ? item.categories.map((purchase) =>
-            purchase.isChecked
-              ? purchase.products.map((purchaseItem) =>
-                  purchaseItem.name === productInfo.name
-                    ? setCart(purchaseItem.addedToCart)
-                    : null
-                )
-              : null
-          )
-        : null
-    );
+    currentUser.map((item, index) => {
+      if (item.isLoggedIn) {
+        return item.categories.map((purchase) => {
+          if (purchase.isChecked) {
+            return purchase.products.map((purchaseItem) => {
+              if (purchaseItem.name === productInfo.name) {
+                setCart(purchaseItem.addedToCart);
+              }
+            });
+          }
+        });
+      }
+    });
   }, [productInfo]);
 
   return (
-    <div id="card">
-      <div className="title">{productInfo.name}</div>
+    <div id={styles.card}>
+      <div className={styles.title}>{productInfo.name}</div>
       <div
-        className="image"
+        className={styles.image}
         style={{ backgroundImage: "url(" + productInfo.imgSrc + ")" }}
       ></div>
-      <div className="aboutBrand">
+      <div className={styles.aboutBrand}>
         <div>{productInfo.brand}</div>
         <div>${productInfo.mrp}</div>
       </div>
-      <div className="addToCard">
-        <button
-        className="addToCart"
+      <div className={styles.addToCard}>
+        <Button
           onClick={() => {
             setCart(cart + 1);
             addToCart(productInfo);
           }}
-          style={cart === 0 ? { display: "block" } : { display: "none" }}
+          className={cart === 0 ? styles.show : styles.hide}
         >
           AddToCard
-        </button>
-        <div className="customize"style={cart > 0 ? { display: "flex" } : { display: "none" }}>
-          <button
-          className="remove"
-            onClick={() => {
-              setCart(cart - 1);
-              reduceItem(productInfo);
-            }}
-          >
-            -
-          </button>
-          <div className="quantity">{cart}</div>
-          <button
-            className="add"
-            onClick={() => {
-              setCart(cart + 1);
-              addToCart(productInfo);
-            }}
-          >
-            +
-          </button>
+        </Button>
+        <div className={styles.customize}>
+          <div className={cart > 0 ? styles.show : styles.hide}>
+            <Button
+              className={styles.remove}
+              onClick={() => {
+                setCart(cart - 1);
+                reduceItem(productInfo);
+              }}
+            >
+              -
+            </Button>
+            <div className={styles.quantity}>{cart}</div>
+            <Button
+              className={styles.add}
+              onClick={() => {
+                setCart(cart + 1);
+                addToCart(productInfo);
+              }}
+            >
+              +
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -86,5 +83,4 @@ const mapStateToProps = createSelector(
   (reducer) => ({ reducer })
 );
 
-
-export default connect(mapStateToProps,bindDispatch)(ProductCard);
+export default connect(mapStateToProps, bindDispatch)(ProductCard);
