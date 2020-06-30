@@ -1,17 +1,17 @@
+@import "./variables";
+
 .cart {
   margin: 10px;
   .backButton {
     background-color: rgb(255, 255, 255);
     padding: 10px 25px;
     color: rgba(0, 0, 0, 0.87);
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.14);
+    box-shadow: $box-shadow;
     cursor: pointer;
   }
   .shoppingCart {
     width: 65%;
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.14);
+    box-shadow: $box-shadow;
     .displayCart {
       padding: 20px 30px;
       .totalNum {
@@ -43,16 +43,11 @@
             padding: 20px 0px;
             .remove,
             .add {
-              height: 32px;
-              width: 55px;
+              @include addRemoveButton;
               margin: 0 10px;
             }
             .image {
-              width: 250px;
-              height: 150px !important;
-              background-repeat: no-repeat !important;
-              background-size: auto !important;
-              background-position: center !important;
+              @include image;
             }
           }
         }
@@ -61,7 +56,7 @@
           display: flex;
           align-items: center;
           background-color: rgb(232, 244, 253);
-          color: rgb(13, 60, 97); 
+          color: rgb(13, 60, 97);
           padding: 0 15px;
         }
       }
@@ -75,5 +70,9 @@
     border-radius: 6px;
     border: none;
     cursor: pointer;
+    display: block;
+  }
+  .hide {
+    display: none;
   }
 }

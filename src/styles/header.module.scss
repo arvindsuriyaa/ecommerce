@@ -1,3 +1,5 @@
+@import './variables';
+
 #title {
   display: flex;
   justify-content: space-between;
@@ -11,21 +13,30 @@
   }
   .link {
     display: flex;
-
     .icon {
       font-size: 20px;
+      color: white;
+      align-self: center;
     }
     a,
-    .user {
-      color: white;
-      padding: 14px;
-      text-decoration: none;
-      cursor: pointer;
+    .userSection {
+      width: auto;
+      .show {
+        display: block;
+        text-transform: uppercase;
+        color: white;
+        padding: 14px;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .hide {
+        display: none;
+      }
     }
     .notification {
       position: absolute;
       top: 11px;
-      right: 38px;
+      right: 25px;
       display: inline;
       width: 18px;
       height: 17px;
@@ -33,9 +44,8 @@
       border-radius: 25px;
       text-align: center;
       font-size: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-weight: bolder;
+      @include displayflex
     }
   }
 }

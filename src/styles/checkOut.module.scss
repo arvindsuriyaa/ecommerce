@@ -1,3 +1,5 @@
+@import './variables';
+
 body {
   margin: 0;
   font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
@@ -13,29 +15,37 @@ body {
     background-color: rgb(255, 255, 255);
     padding: 10px 25px;
     color: rgba(0, 0, 0, 0.87);
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.14);
+    box-shadow: $box-shadow;
     cursor: pointer;
     margin: 15px 0px;
   }
   .checkOut {
     background-color: aliceblue;
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.14);
+    box-shadow: $box-shadow;
     .orderStatus {
-      // display: flex;
       padding: 16px;
       align-items: center;
       justify-content: space-between;
+      .orderTitle {
+        font-size: 23px;
+      }
+      .totalItems {
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.54);
+      }
     }
     .orderDetails {
-      .CheckoutItems,
+      .checkOutItems,
       .totalValue {
         display: flex;
         padding: 16px;
         justify-content: space-between;
         align-items: center;
         font-weight: bold;
+      }
+      .bottomLine {
+        width: 875px;
+        margin: 0 15px;
       }
     }
   }
@@ -48,4 +58,11 @@ body {
     border: none;
     cursor: pointer;
   }
+}
+
+.fade {
+  opacity: 0.4;
+}
+.show {
+  opacity: 1;
 }

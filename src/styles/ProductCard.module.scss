@@ -1,9 +1,10 @@
+@import "./variables";
+
 #card {
   color: rgba(0, 0, 0, 0.87);
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   background-color: #fff;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: $box-shadow;
   overflow: hidden;
   width: 315px;
   height: 320px;
@@ -16,10 +17,8 @@
     align-items: center;
   }
   .image {
-    height: 150px !important;
-    background-repeat: no-repeat !important;
-    background-size: auto !important;
-    background-position: center !important;
+    @include image;
+    width: auto;
   }
   .aboutBrand {
     padding: 16px;
@@ -28,21 +27,32 @@
   .addToCard {
     display: flex;
     justify-content: center;
-    .addToCart {
+    .show {
+      display: block;
       height: 32px;
       width: 96%;
     }
+    .hide {
+      display: none;
+    }
     .customize {
-      width: 96%;
-      justify-content: space-evenly;
-      .add, .remove {
-        height: 32px;
-        width: 55px;
-      }
-      .quantity{
+      .show {
         display: flex;
-        justify-content: center;
-        align-self: center;
+        width: 96%;
+        justify-content: space-evenly;
+        .add,
+        .remove {
+          @include addRemoveButton;
+        }
+        .quantity {
+          display: flex;
+          justify-content: center;
+          align-self: center;
+          padding: 0px 30px;
+        }
+      }
+      .hide {
+        display: none;
       }
     }
   }

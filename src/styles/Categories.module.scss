@@ -1,16 +1,24 @@
 #list {
   width: 25%;
   height: 100%;
-  ul {
+  .items {
     list-style-type: none;
     padding: 12px;
     margin: 0px;
     font-size: 18px;
+    .fade {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    .show {
+      pointer-events: all;
+      opacity: 1;
+    }
     li {
       padding: 10px 10px;
       display: flex;
       justify-content: space-between;
-      input[type="checkbox"] {
+      .toggleCheck {
         cursor: pointer;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -22,13 +30,13 @@
         border: 1px solid white;
         transform: scale(1.25);
       }
-      input[type="checkbox"]:checked {
+      .toggleCheck:checked {
         background: #f50057;
       }
-      input[type="checkbox"]:hover {
+      .toggleCheck:hover {
         filter: brightness(90%);
       }
-      input[type="checkbox"]:after {
+      .toggleCheck:after {
         content: "";
         font-size: 16px;
         position: relative;
@@ -42,11 +50,11 @@
         display: none;
       }
 
-      input[type="checkbox"]:checked:after {
+      .toggleCheck:checked:after {
         display: block;
       }
 
-      input[type="checkbox"]:disabled:after {
+      .toggleCheck:disabled:after {
         border-color: #7b7b7b;
       }
     }

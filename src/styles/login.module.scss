@@ -1,17 +1,16 @@
+@import "./variables";
+
 body {
-  margin:0px;
+  margin: 0px;
   #login {
-    background: url("./ecom.png");
+    background: url("./Assets/ecom.png");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include displayflex;
     fieldset {
       width: 35%;
-      //   height: 40%;
       background: #ffffffec;
       legend {
         background-color: gray;
@@ -25,7 +24,7 @@ body {
         width: 37%;
         justify-content: center;
         margin: auto;
-        input[type="text"] {
+        .userField {
           padding: 10px;
           border-style: double;
           width: 100%;
@@ -40,7 +39,7 @@ body {
           display: flex;
           justify-content: center;
           margin: 10px;
-          button {
+          .submit {
             border: none;
             padding: 12px;
             color: white;
