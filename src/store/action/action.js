@@ -58,17 +58,15 @@ export const addToCart = (productInfo) => {
     currentUser.map((item, index) => {
       if (item.isLoggedIn) {
         return item.categories.map((purchase) => {
-          if (purchase.isChecked) {
-            return purchase.products.map((purchaseItem) => {
-              if (purchaseItem.name === productInfo.name) {
-                purchaseItem.addedToCart += 1;
-                purchaseItem.quantityPrice =
-                  purchaseItem.addedToCart * purchaseItem.mrp;
-              }
-              notification += purchaseItem.addedToCart;
-              userIndex = index;
-            });
-          }
+          return purchase.products.map((purchaseItem) => {
+            if (purchaseItem.name === productInfo.name) {
+              purchaseItem.addedToCart += 1;
+              purchaseItem.quantityPrice =
+                purchaseItem.addedToCart * purchaseItem.mrp;
+            }
+            notification += purchaseItem.addedToCart;
+            userIndex = index;
+          });
         });
       }
     });
@@ -92,17 +90,15 @@ export const reduceItem = (productInfo) => {
     currentUser.map((item, index) => {
       if (item.isLoggedIn) {
         return item.categories.map((purchase) => {
-          if (purchase.isChecked) {
-            return purchase.products.map((purchaseItem) => {
-              if (purchaseItem.name === productInfo.name) {
-                purchaseItem.addedToCart -= 1;
-                purchaseItem.quantityPrice =
-                  purchaseItem.addedToCart * purchaseItem.mrp;
-              }
-              notification += purchaseItem.addedToCart;
-              userIndex = index;
-            });
-          }
+          return purchase.products.map((purchaseItem) => {
+            if (purchaseItem.name === productInfo.name) {
+              purchaseItem.addedToCart -= 1;
+              purchaseItem.quantityPrice =
+                purchaseItem.addedToCart * purchaseItem.mrp;
+            }
+            notification += purchaseItem.addedToCart;
+            userIndex = index;
+          });
         });
       }
     });
