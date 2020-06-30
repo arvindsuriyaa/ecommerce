@@ -20,7 +20,6 @@ export const collectInfo = (event) => {
 
 export const placeOrder = () => {
   return (dispatch, getState) => {
-    // console.log("placeOrder", props);
     const data = sessionStorage.getItem("userDetails");
     let currentUser = JSON.parse(data);
     let notification;
@@ -29,16 +28,14 @@ export const placeOrder = () => {
     currentUser.map((user, index) =>
       user.isLoggedIn
         ? user.categories.map((purchase) =>
-            purchase.isChecked
-              ? purchase.products.map(
-                  (purchaseItem) => (
-                    (purchaseItem.addedToCart = 0),
-                    (purchaseItem.quantityprice = 0),
-                    (userIndex = index),
-                    (notification = 0)
-                  )
-                )
-              : null
+            purchase.products.map(
+              (purchaseItem) => (
+                (purchaseItem.addedToCart = 0),
+                (purchaseItem.quantityprice = 0),
+                (userIndex = index),
+                (notification = 0)
+              )
+            )
           )
         : null
     );
@@ -48,40 +45,33 @@ export const placeOrder = () => {
     dispatch(assignData("notification", notification));
     login.categories = currentUser[userIndex].categories;
     dispatch(assignData("login", login));
-    // props.onClose;
   };
 };
 export const addToCart = (productInfo) => {
-  //   debugger
   return (dispatch, getState) => {
-    console.log("productINFOOOOOO", productInfo);
     let { notification, login } = getState().reducer;
     const data = sessionStorage.getItem("userDetails");
     let currentUser = JSON.parse(data);
-    console.log("productINFO", productInfo.name);
     notification = 0;
     let userIndex;
-    currentUser.map((user, index) =>
-      user.isLoggedIn
-        ? user.categories.map((purchase) =>
-            purchase.isChecked
-              ? purchase.products.map(
-                  (purchaseItem) => (
-                    purchaseItem.name === productInfo.name
-                      ? ((purchaseItem.addedToCart += 1),
-                        (purchaseItem.quantityPrice =
-                          purchaseItem.addedToCart * purchaseItem.mrp))
-                      : null,
-                    (notification += purchaseItem.addedToCart),
-                    (userIndex = index)
-                  )
-                )
-              : null
-          )
-        : null
-    );
 
-    console.log("currentUser", currentUser);
+    currentUser.map((item, index) => {
+      if (item.isLoggedIn) {
+        return item.categories.map((purchase) => {
+          if (purchase.isChecked) {
+            return purchase.products.map((purchaseItem) => {
+              if (purchaseItem.name === productInfo.name) {
+                purchaseItem.addedToCart += 1;
+                purchaseItem.quantityPrice =
+                  purchaseItem.addedToCart * purchaseItem.mrp;
+              }
+              notification += purchaseItem.addedToCart;
+              userIndex = index;
+            });
+          }
+        });
+      }
+    });
     sessionStorage.clear();
     sessionStorage.setItem("userDetails", JSON.stringify(currentUser));
     dispatch(assignData("userDetails", currentUser));
@@ -92,33 +82,30 @@ export const addToCart = (productInfo) => {
 };
 
 export const reduceItem = (productInfo) => {
-  console.log("productINFO", productInfo);
   return (dispatch, getState) => {
     let { notification, login } = getState().reducer;
     const data = sessionStorage.getItem("userDetails");
     let currentUser = JSON.parse(data);
     let userIndex;
     notification = 0;
-    currentUser.map((item, index) =>
-      item.isLoggedIn
-        ? item.categories.map((purchase) =>
-            purchase.isChecked
-              ? purchase.products.map(
-                  (purchaseItem) => (
-                    purchaseItem.name === productInfo.name
-                      ? ((purchaseItem.addedToCart -= 1),
-                        (purchaseItem.quantityPrice =
-                          purchaseItem.addedToCart * purchaseItem.mrp))
-                      : null,
-                    (notification += purchaseItem.addedToCart),
-                    (userIndex = index)
-                  )
-                )
-              : null
-          )
-        : null
-    );
-    console.log("currentUser", currentUser);
+
+    currentUser.map((item, index) => {
+      if (item.isLoggedIn) {
+        return item.categories.map((purchase) => {
+          if (purchase.isChecked) {
+            return purchase.products.map((purchaseItem) => {
+              if (purchaseItem.name === productInfo.name) {
+                purchaseItem.addedToCart -= 1;
+                purchaseItem.quantityPrice =
+                  purchaseItem.addedToCart * purchaseItem.mrp;
+              }
+              notification += purchaseItem.addedToCart;
+              userIndex = index;
+            });
+          }
+        });
+      }
+    });
     sessionStorage.clear();
     sessionStorage.setItem("userDetails", JSON.stringify(currentUser));
     dispatch(assignData("userDetails", currentUser));
@@ -185,7 +172,62 @@ export const submitHandler = () => {
       login.categories = [];
       login.isLoggedIn = isLoggedIn;
       dispatch(assignData("login", { ...login }));
-      console.log("userDetails", userDetails);
     }
+  };
+};
+
+export const toggleChange = (event) => {
+  return (dispatch, getState) => {
+    let { login } = getState().reducer;
+    let { categories } = login;
+    const data = sessionStorage.getItem("userDetails");
+    let indexValue;
+    categories.map((item, index) =>
+      event.target.name === item.label
+        ? ((item.isChecked = !item.isChecked), (indexValue = index))
+        : null
+    );
+    dispatch(assignData("login", { ...login, categories: categories }));
+    let currentUser = JSON.parse(data);
+    let userIndex;
+    let checkFlag = [];
+    currentUser.map((user, index) => {
+      if (user.isLoggedIn) {
+        userIndex = index;
+        categories.map((purchase) => {
+          checkFlag.push(purchase.isChecked);
+        });
+        user.categories.map((purchase) => {
+          if (purchase.isChecked) {
+            purchase.products.map((purchaseItem) => {
+              return categories[indexValue].products.map((item) => {
+                if (item.name === purchaseItem.name) {
+                  item.addedToCart = purchaseItem.addedToCart;
+                  item.quantityPrice = purchaseItem.quantityPrice;
+                }
+              });
+            });
+          }
+        });
+        user.categories.splice(indexValue, 1, categories[indexValue]);
+      }
+    });
+    for (let iterate = 0; iterate < checkFlag.length; iterate++) {
+      if (!checkFlag[iterate]) {
+        currentUser[userIndex].selectAll = false;
+        break;
+      } else {
+        currentUser[userIndex].selectAll = true;
+      }
+    }
+    sessionStorage.clear();
+    sessionStorage.setItem("userDetails", JSON.stringify(currentUser));
+    dispatch(assignData("userDetails", currentUser));
+    dispatch(
+      assignData("login", {
+        ...login,
+        categories: currentUser[userIndex].categories,
+      })
+    );
   };
 };
