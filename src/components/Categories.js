@@ -24,11 +24,9 @@ const Categories = (props) => {
     currentUser.map((item) => {
       if (item.isLoggedIn) {
         return item.categories.map((purchase) => {
-          if (purchase.isChecked) {
-            return purchase.products.map((purchaseItem) => {
-              itemCount.push(purchaseItem.addedToCart);
-            });
-          }
+          return purchase.products.map((purchaseItem) => {
+            itemCount.push(purchaseItem.addedToCart);
+          });
         });
       }
     });

@@ -52,21 +52,19 @@ const Checkout = (props) => {
             <div className={styles.orderDetails}>
               {categories &&
                 categories.map((purchaseList) => {
-                  if (purchaseList.isChecked) {
-                    return purchaseList.products.map((product) =>
-                      product.addedToCart ? (
-                        <div>
-                          <div className={styles.checkOutItems}>
-                            <span>
-                              {product.addedToCart} X {product.name}
-                            </span>
-                            <span>$ {product.quantityPrice}</span>
-                          </div>
-                          <hr className={styles.bottomLine} />
+                  return purchaseList.products.map((product) =>
+                    product.addedToCart ? (
+                      <div>
+                        <div className={styles.checkOutItems}>
+                          <span>
+                            {product.addedToCart} X {product.name}
+                          </span>
+                          <span>$ {product.quantityPrice}</span>
                         </div>
-                      ) : null
-                    );
-                  }
+                        <hr className={styles.bottomLine} />
+                      </div>
+                    ) : null
+                  );
                 })}
               <div className={styles.totalValue}>
                 <span>Total Price</span>

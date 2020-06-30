@@ -88,44 +88,41 @@ const ShoppingCart = (props) => {
                   <tbody>
                     {productList &&
                       productList.map((purchaseItem, index) => {
-                        if (purchaseItem.isChecked) {
-                          return purchaseItem.products.map((item) =>
-                            item.addedToCart ? (
-                              <tr key={index}>
-                                <td>
-                                  <div
-                                    className={styles.image}
-                                    style={{
-                                      backgroundImage:
-                                        "url(" + item.imgSrc + ")",
-                                    }}
-                                  ></div>
-                                </td>
-                                <td>{item.name}</td>
-                                <td>
-                                  <Button
-                                    className={styles.remove}
-                                    onClick={() => {
-                                      removeItem(item);
-                                    }}
-                                  >
-                                    -
-                                  </Button>
-                                  {item.addedToCart}
-                                  <Button
-                                    className={styles.add}
-                                    onClick={() => {
-                                      placeItem(item);
-                                    }}
-                                  >
-                                    +
-                                  </Button>
-                                </td>
-                                <td>$ {item.quantityPrice}</td>
-                              </tr>
-                            ) : null
-                          );
-                        }
+                        return purchaseItem.products.map((item) =>
+                          item.addedToCart ? (
+                            <tr key={index}>
+                              <td>
+                                <div
+                                  className={styles.image}
+                                  style={{
+                                    backgroundImage: "url(" + item.imgSrc + ")",
+                                  }}
+                                ></div>
+                              </td>
+                              <td>{item.name}</td>
+                              <td>
+                                <Button
+                                  className={styles.remove}
+                                  onClick={() => {
+                                    removeItem(item);
+                                  }}
+                                >
+                                  -
+                                </Button>
+                                {item.addedToCart}
+                                <Button
+                                  className={styles.add}
+                                  onClick={() => {
+                                    placeItem(item);
+                                  }}
+                                >
+                                  +
+                                </Button>
+                              </td>
+                              <td>$ {item.quantityPrice}</td>
+                            </tr>
+                          ) : null
+                        );
                       })}
                   </tbody>
                   <tfoot>

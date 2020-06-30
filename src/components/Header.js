@@ -19,14 +19,12 @@ const Header = (props) => {
     let itemCount = [];
     let userIndex;
     currentUser.map((item, index) => {
-      userIndex = index;
       if (item.isLoggedIn) {
+        userIndex = index;
         return item.categories.map((purchase) => {
-          if (purchase.isChecked) {
-            return purchase.products.map((purchaseItem) => {
-              itemCount.push(purchaseItem.addedToCart);
-            });
-          }
+          return purchase.products.map((purchaseItem) => {
+            itemCount.push(purchaseItem.addedToCart);
+          });
         });
       }
     });
