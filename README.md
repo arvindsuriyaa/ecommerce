@@ -1,4 +1,16 @@
-## Sample
+## Ecommerce UI with Functionality in React.
+
+I have created an ecommerce like UI along with required functionality to checkout out products to the payment screen. No external UI library's were used for development purposes, all the styles and layout created were done from scratch.<br/>
+
+This project was developed by myself as part of learning experience.<br/>
+
+Library and packages used : <br/>
+1) react
+2) redux
+3) react-redux
+4) react-table v6
+
+
 
 
 ## Available Scripts
