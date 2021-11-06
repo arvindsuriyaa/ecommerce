@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect} from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import * as styles from "../styles/header.module.scss";
 import { bindDispatch } from "../utils";
@@ -23,10 +24,11 @@ const Header = (props) => {
         userIndex = index;
         return item.categories.map((purchase) => {
           return purchase.products.map((purchaseItem) => {
-            itemCount.push(purchaseItem.addedToCart);
+            return itemCount.push(purchaseItem.addedToCart);
           });
         });
       }
+      return null
     });
     let totalItem = 0;
     itemCount.map((item) => (totalItem += item));

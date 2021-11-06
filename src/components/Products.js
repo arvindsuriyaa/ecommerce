@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import * as styles from "../styles/products.module.scss";
 import Categories from "./Categories";
@@ -23,6 +24,7 @@ const Products = (props) => {
           categories: currentUser[index].categories,
         });
       }
+      return null
     });
   }, []);
 

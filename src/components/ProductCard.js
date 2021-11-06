@@ -1,4 +1,3 @@
-/* eslint-disable no-sequences */
 import React, { useState, useEffect } from "react";
 import * as styles from "../styles/ProductCard.module.scss";
 import { bindDispatch } from "../utils";
@@ -22,10 +21,13 @@ const ProductCard = (props) => {
               if (purchaseItem.name === productInfo.name) {
                 setCart(purchaseItem.addedToCart);
               }
+              return null
             });
           }
+          return null
         });
       }
+      return null
     });
   }, [productInfo]);
 

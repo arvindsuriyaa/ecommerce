@@ -1,4 +1,7 @@
-import { productSeed } from "/home/vhitech/Desktop/ecommerce/src/utils/productSeed";
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-sequences */
+
+import { productSeed } from "../../utils/productSeed";
 import ASSIGN_DATA from "../Types/types";
 
 export const assignData = (name, value) => ({
@@ -28,15 +31,15 @@ export const placeOrder = () => {
     currentUser.map((user, index) =>
       user.isLoggedIn
         ? user.categories.map((purchase) =>
-            purchase.products.map(
-              (purchaseItem) => (
-                (purchaseItem.addedToCart = 0),
-                (purchaseItem.quantityprice = 0),
-                (userIndex = index),
-                (notification = 0)
-              )
+          purchase.products.map(
+            (purchaseItem) => (
+              (purchaseItem.addedToCart = 0),
+              (purchaseItem.quantityprice = 0),
+              (userIndex = index),
+              (notification = 0)
             )
           )
+        )
         : null
     );
     sessionStorage.clear();
@@ -66,9 +69,11 @@ export const addToCart = (productInfo) => {
             }
             notification += purchaseItem.addedToCart;
             userIndex = index;
+            return null
           });
         });
       }
+      return null
     });
     sessionStorage.clear();
     sessionStorage.setItem("userDetails", JSON.stringify(currentUser));
@@ -98,9 +103,11 @@ export const reduceItem = (productInfo) => {
             }
             notification += purchaseItem.addedToCart;
             userIndex = index;
+            return null
           });
         });
       }
+      return null
     });
     sessionStorage.clear();
     sessionStorage.setItem("userDetails", JSON.stringify(currentUser));
@@ -191,7 +198,7 @@ export const toggleChange = (event) => {
       if (user.isLoggedIn) {
         userIndex = index;
         categories.map((purchase) => {
-          checkFlag.push(purchase.isChecked);
+          return checkFlag.push(purchase.isChecked);
         });
         user.categories.map((purchase) => {
           if (purchase.isChecked) {
@@ -201,12 +208,15 @@ export const toggleChange = (event) => {
                   item.addedToCart = purchaseItem.addedToCart;
                   item.quantityPrice = purchaseItem.quantityPrice;
                 }
+                return null
               });
             });
           }
+          return null
         });
         user.categories.splice(indexValue, 1, categories[indexValue]);
       }
+      return null
     });
     for (let iterate = 0; iterate < checkFlag.length; iterate++) {
       if (!checkFlag[iterate]) {

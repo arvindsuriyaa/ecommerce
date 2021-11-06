@@ -1,4 +1,4 @@
-/* eslint-disable no-sequences */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import * as styles from "../styles/Categories.module.scss";
 import { connect } from "react-redux";
@@ -25,10 +25,11 @@ const Categories = (props) => {
       if (item.isLoggedIn) {
         return item.categories.map((purchase) => {
           return purchase.products.map((purchaseItem) => {
-            itemCount.push(purchaseItem.addedToCart);
+            return itemCount.push(purchaseItem.addedToCart);
           });
         });
       }
+      return null
     });
     let totalItem = 0;
     itemCount.map((item) => (totalItem += item));

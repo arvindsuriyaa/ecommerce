@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from "react";
 import * as styles from "../styles/shoppingCart.module.scss";
 import { useHistory } from "react-router";
