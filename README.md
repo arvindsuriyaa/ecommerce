@@ -1,6 +1,6 @@
 ## Ecommerce UI with Functionality in React.
 
-I have created an ecommerce like UI along with required functionality to checkout out products to the payment screen. No external UI library's were used for development purposes, all the styles and layout created were done from scratch.<br/>
+I have created an ecommerce like UI along with required functionality to checkout out products to the payment screen. No external UI Libraries were used for development purposes, all the styles and layout created were done from scratch.<br/>
 
 This project was developed by myself as part of learning experience.<br/>
 
